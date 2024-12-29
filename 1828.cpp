@@ -4,61 +4,46 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void body(int caseNo){
+    string sheldonOption, rajOption;
+    cin>> sheldonOption >> rajOption;
+
+    //edge case: two options are equal
+    if(sheldonOption == rajOption){
+        cout<< "Caso #" << caseNo <<": " << "De novo!" <<endl;
+        return;
+    }
+    //vector<string> options = {"scissors", "paper", "rock", "lizards", "Spock", "scissors", "lizard", "paper", "Spock", "rock", "scissors"};
+    vector<string> options = {"tesoura", "papel", "pedra", "lagarto", "Spock", "tesoura", "lagarto", "papel", "Spock", "pedra", "tesoura"};
+
+    cout<< "Caso #" << caseNo <<": ";
+    for(int i=0; i<options.size()-1 ;){
+        //cout<< options[i] <<" "<< options[i+1]<<endl;
+
+        if(sheldonOption==options[i] && rajOption==options[i+1]){
+            cout<< "Bazinga!" <<endl;
+            break;
+        }
+        
+        i++;
+        if(i==options.size()-1){
+            cout<< "Raj trapaceou!" <<endl;
+            break;
+        }
+    }
+}
+
 int main(){
     int t;
     cin>> t;
 
-    int z=1;
-    while(z<=t){
-        cin.ignore();
-        //char list[10][10] = {"scissors", "paper", "rock", "lizard", "Spock"};
-        char list[10][10] = {"tesoura", "papel", "pedra", "lagarto", "Spock"};
-
-        char sheldon[10], raj[10];
-        cin>> sheldon >> raj;
-        
-        int sheldon_idx=0;
-        int raj_idx=0;
-        for(int i=0; i<5 ;i++){
-            if(strcmp(list[i], sheldon)==0){
-                sheldon_idx= i;
-            }
-
-            if(strcmp(list[i], raj)==0){
-                raj_idx= i;
-            }
-        }
-        //cout<< sheldon_idx <<" "<< raj_idx <<endl;
-
-
-
-        //index analysis
-        if(sheldon_idx==raj_idx){
-            cout<< "Caso #" << z <<": "<< "De novo!" <<endl;
+    int i=1;
+    while(1){
+        if(i>t){
             break;
         }
-        //check with the next element of the list (before the last element)
-        else if(sheldon_idx<4 && sheldon_idx==raj_idx-1){
-            cout<< "Caso #" << z <<": "<< "Bazinga!" <<endl;
-        }
-        //check the last element now
-        else if(sheldon_idx==4 && sheldon_idx-4==raj_idx){
-            cout<< "Caso #" << z <<": "<< "Bazinga!" <<endl;
-        }
-        //check 1st, 2nd element of the list
-        else if(sheldon_idx<2 && sheldon_idx==raj_idx-3){
-            cout<< "Caso #" << z <<": "<< "Bazinga!" <<endl;
-        }
-        //check 3rd, 4th, 5th element of the list
-        else if(sheldon_idx>=2 && sheldon_idx-2==raj_idx){
-            cout<< "Caso #" << z <<": "<< "Bazinga!" <<endl;
-        }
-        //raj cheating
-        else{
-            cout<< "Caso #" << z <<": "<< "Raj trapaceou!" <<endl;
-        }
-
-        z++;
+        body(i);
+        i++;
     }
     
     return 0;
